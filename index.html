@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreesh Pokharel — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #090d1a;
+    --bg2: #0e1428;
+    --bg3: #131c36;
+    --accent: #e8a840;
+    --accent2: #f0c96b;
+    --blue: #3b82f6;
+    --teal: #14b8a6;
+    --text: #e8edf5;
+    --muted: #8494b0;
+    --border: rgba(232,168,64,0.18);
+    --card: rgba(19,28,54,0.85);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* STAR BACKGROUND */
+  #stars {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 95%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(2px 2px at 75% 55%, rgba(255,255,255,0.15) 0%, transparent 100%),
+      radial-gradient(2px 2px at 25% 40%, rgba(255,255,255,0.1) 0%, transparent 100%);
+  }
+
+  /* MOUNTAIN SVG at bottom of hero */
+  .mountain-wrap { position: absolute; bottom: 0; left: 0; width: 100%; line-height: 0; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(9,13,26,0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 500;
+    color: var(--muted); text-decoration: none;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  #hero {
+    position: relative; min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2rem 10rem;
+    overflow: hidden;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--border);
+    padding: 0.35rem 1.1rem; border-radius: 100px;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--muted); margin-top: 1.4rem;
+    font-weight: 300; letter-spacing: 0.02em;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .hero-location {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem; color: var(--muted);
+    margin-top: 0.8rem;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .btn-primary {
+    padding: 0.75rem 2rem; border-radius: 100px;
+    background: var(--accent); color: #090d1a;
+    font-weight: 700; font-size: 0.88rem; letter-spacing: 0.04em;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,168,64,0.35); }
+  .btn-outline {
+    padding: 0.75rem 2rem; border-radius: 100px;
+    border: 1px solid var(--border); color: var(--text);
+    font-size: 0.88rem; letter-spacing: 0.04em;
+    text-decoration: none; transition: border-color 0.2s, transform 0.2s;
+    background: transparent;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 2; padding: 7rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 600; color: var(--text); line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+  .section-divider {
+    width: 48px; height: 2px; background: var(--accent);
+    margin-bottom: 3rem; border-radius: 2px;
+  }
+
+  /* ABOUT */
+  #about { background: var(--bg2); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center;
+  }
+  .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 1.02rem; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .info-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .info-card {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+  }
+  .info-card .label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .info-card .value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+
+  /* SKILLS */
+  #skills { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-group {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 1.8rem;
+  }
+  .skill-group h3 {
+    font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600;
+    color: var(--accent); margin-bottom: 1.2rem; letter-spacing: 0.06em;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem; padding: 0.3rem 0.85rem;
+    border-radius: 100px;
+    border: 1px solid rgba(232,168,64,0.25);
+    color: var(--accent2); background: rgba(232,168,64,0.06);
+    letter-spacing: 0.04em;
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--bg2); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 2rem; }
+  .project-card {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 18px; padding: 2.2rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--teal));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .project-card:hover { transform: translateY(-4px); border-color: rgba(232,168,64,0.4); }
+  .project-card:hover::before { opacity: 1; }
+  .project-number {
+    font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 700;
+    color: rgba(232,168,64,0.08); line-height: 1;
+    position: absolute; top: 1.5rem; right: 1.8rem;
+  }
+  .project-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(232,168,64,0.1); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.4rem;
+  }
+  .project-title {
+    font-family: 'Cinzel', serif; font-size: 1.35rem; font-weight: 600;
+    color: var(--text); margin-bottom: 0.6rem;
+  }
+  .project-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+  .project-features { margin-bottom: 1.6rem; }
+  .project-features li {
+    list-style: none; font-size: 0.88rem; color: var(--muted);
+    padding: 0.25rem 0;
+    display: flex; align-items: flex-start; gap: 0.5rem;
+  }
+  .project-features li::before { content: '▸'; color: var(--accent); font-size: 0.75rem; margin-top: 0.25rem; flex-shrink: 0; }
+  .tech-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.6rem; }
+  .tech-tag {
+    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    padding: 0.22rem 0.7rem; border-radius: 4px;
+    background: rgba(59,130,246,0.1); color: #7eb8f7;
+    border: 1px solid rgba(59,130,246,0.2);
+  }
+  .project-links { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .plink {
+    font-size: 0.82rem; font-weight: 500; color: var(--accent);
+    text-decoration: none; padding: 0.45rem 1.1rem;
+    border: 1px solid var(--border); border-radius: 100px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .plink:hover { background: rgba(232,168,64,0.1); border-color: var(--accent); }
+
+  /* STRATOS badge */
+  .stratos-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--teal); border: 1px solid rgba(20,184,166,0.3);
+    background: rgba(20,184,166,0.07);
+    padding: 0.22rem 0.75rem; border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+  .stratos-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); display: inline-block; }
+  /* STRATOS card accent override */
+  .project-card.stratos::before {
+    background: linear-gradient(90deg, var(--teal), #818cf8);
+  }
+  .project-card.stratos:hover { border-color: rgba(20,184,166,0.4); }
+  .project-card.stratos .project-number { color: rgba(20,184,166,0.08); }
+  .project-card.stratos .project-icon { background: rgba(20,184,166,0.1); border-color: rgba(20,184,166,0.25); }
+
+  /* Hub feature mini-grid */
+  .hub-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .hub-item {
+    background: rgba(20,184,166,0.06); border: 1px solid rgba(20,184,166,0.15);
+    border-radius: 8px; padding: 0.55rem 0.7rem;
+    font-size: 0.75rem; color: var(--muted);
+    display: flex; flex-direction: column; gap: 0.15rem;
+  }
+  .hub-item .hub-label {
+    font-family: 'Space Mono', monospace; font-size: 0.6rem;
+    color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* EDUCATION */
+  #education { background: var(--bg); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .edu-card {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 1.8rem;
+    display: flex; align-items: flex-start; gap: 1.2rem;
+  }
+  .gpa-circle {
+    flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%;
+    border: 2px solid var(--accent); display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .gpa-num { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .gpa-lbl { font-size: 0.58rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .edu-info h3 { font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.3rem; }
+  .edu-info p { font-size: 0.85rem; color: var(--muted); }
+  .awaiting {
+    flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%;
+    border: 2px dashed rgba(232,168,64,0.4); display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .awaiting span { font-size: 0.6rem; color: var(--accent); text-align: center; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.3; }
+
+  /* CONTACT */
+  #contact { background: var(--bg2); }
+  .contact-inner {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 20px; padding: 3.5rem; text-align: center;
+    max-width: 700px; margin: 0 auto;
+    position: relative; overflow: hidden;
+  }
+  .contact-inner::after {
+    content: ''; position: absolute;
+    bottom: -60px; right: -60px; width: 200px; height: 200px;
+    border-radius: 50%; background: rgba(232,168,64,0.04);
+    border: 1px solid rgba(232,168,64,0.08);
+  }
+  .contact-inner h3 { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 1rem; }
+  .contact-inner p { color: var(--muted); margin-bottom: 2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.7rem 1.4rem; border-radius: 100px;
+    border: 1px solid var(--border); color: var(--text);
+    text-decoration: none; font-size: 0.88rem; transition: all 0.2s;
+    background: rgba(255,255,255,0.02);
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .contact-link svg { width: 16px; height: 16px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem; color: var(--muted);
+    font-size: 0.8rem; font-family: 'Space Mono', monospace;
+    border-top: 0.5px solid var(--border);
+    position: relative; z-index: 2;
+  }
+  footer span { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(232,168,64,0.3); border-radius: 3px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .info-cards { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .hub-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">SP</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">🤖 AI & ML Enthusiast · Developer</div>
+    <h1 class="hero-name">Shreesh<br><span>Pokharel</span></h1>
+    <p class="hero-subtitle">Building intelligent systems from the foothills of the Himalayas</p>
+    <p class="hero-location">
+      <span class="dot"></span>
+      Biratnagar-10, Morang, Nepal
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="mountain-wrap">
+    <svg viewBox="0 0 1440 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <polygon points="0,220 180,80 340,160 520,40 700,140 900,20 1100,120 1300,60 1440,110 1440,220" fill="#090d1a"/>
+      <polygon points="0,220 180,80 340,160 520,40 700,140 900,20 1100,120 1300,60 1440,110 1440,220" fill="none" stroke="rgba(232,168,64,0.15)" stroke-width="1"/>
+      <!-- snow caps -->
+      <polygon points="480,52 520,40 560,55" fill="rgba(232,168,64,0.12)"/>
+      <polygon points="860,32 900,20 940,35" fill="rgba(232,168,64,0.12)"/>
+      <polygon points="1262,66 1300,60 1335,70" fill="rgba(232,168,64,0.10)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">Young builder,<br>big ideas.</h2>
+        <div class="section-divider"></div>
+        <p>Hi! I'm <strong>Shreesh Pokharel</strong>, a 17-year-old developer from Biratnagar, Nepal with a deep passion for <strong>Artificial Intelligence and Machine Learning</strong>. I believe in learning by building — every project is a new adventure.</p>
+        <p>Born on <strong>August 25, 2008</strong> (Bhadra 9, 2065 BS), I've been fascinated by how software can automate, analyze, and assist. I'm currently awaiting my Class 12 results while continuing to build real-world projects.</p>
+        <p>When I'm not coding, I'm exploring new ideas in AI, reading about technology trends, and dreaming of the next project to build.</p>
+      </div>
+      <div class="info-cards reveal">
+        <div class="info-card">
+          <div class="label">Date of Birth</div>
+          <div class="value">Aug 25, 2008</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Location</div>
+          <div class="value">Biratnagar-10, Nepal</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Focus Area</div>
+          <div class="value">AI & Machine Learning</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Projects Built</div>
+          <div class="value">3 Deployed</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Email</div>
+          <div class="value" style="font-size:0.82rem;">shreeshpokharel@gmail.com</div>
+        </div>
+        <div class="info-card">
+          <div class="label">Phone</div>
+          <div class="value">9704526827</div>
+        </div>
+        <div class="info-card" style="grid-column: span 2;">
+          <div class="label">Family</div>
+          <div class="value">Parents · Younger Brother</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Technical Skills</p>
+      <h2 class="section-title">My Tech Stack</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <h3>Languages</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Frameworks & Libraries</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Flask</span>
+          <span class="skill-tag">Flask-Login</span>
+          <span class="skill-tag">SQLAlchemy</span>
+          <span class="skill-tag">Chart.js</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Tools & Automation</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">psutil</span>
+          <span class="skill-tag">subprocess</span>
+          <span class="skill-tag">os</span>
+          <span class="skill-tag">webbrowser</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Databases & Deployment</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">SQLite</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Render</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Interests & Learning</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">Artificial Intelligence</span>
+          <span class="skill-tag">Neural Networks</span>
+          <span class="skill-tag">NLP</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Future Goals</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Voice AI</span>
+          <span class="skill-tag">Nepali NLP</span>
+          <span class="skill-tag">Computer Vision</span>
+          <span class="skill-tag">Deep Learning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">My Work</p>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="projects-grid">
+
+      <!-- HimalAI -->
+      <div class="project-card reveal">
+        <div class="project-number">01</div>
+        <div class="project-icon">🤖</div>
+        <h3 class="project-title">HimalAI Assistant</h3>
+        <p class="project-desc">A desktop automation assistant built with Python that responds to text-based commands to launch apps, open websites, and control your system — named after the mighty Himalayas.</p>
+        <ul class="project-features">
+          <li>Launch Chrome, Spotify, WhatsApp, Notepad, Calculator, Paint & CMD</li>
+          <li>Open any website or perform Google searches as fallback</li>
+          <li>System commands including shutdown and restart</li>
+          <li>Modular codebase: main.py, commands.py, app_finder.py</li>
+          <li>Future: Voice commands, Nepali language support, AI chat</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">psutil</span>
+          <span class="tech-tag">subprocess</span>
+          <span class="tech-tag">os</span>
+          <span class="tech-tag">webbrowser</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/shreeshpokharel-stack" class="plink" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <!-- Finance Tracker -->
+      <div class="project-card reveal">
+        <div class="project-number">02</div>
+        <div class="project-icon">💰</div>
+        <h3 class="project-title">Finance Tracker</h3>
+        <p class="project-desc">A full-stack personal finance web application with user authentication, income/expense tracking, analytics dashboard, and live deployment on Render.</p>
+        <ul class="project-features">
+          <li>User registration & login with secure password hashing</li>
+          <li>Income and expense tracking with category-based organization</li>
+          <li>Interactive financial dashboard with Chart.js analytics</li>
+          <li>Real-time balance calculation and responsive UI</li>
+          <li>Future: Dark mode, CSV export, AI expense insights</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Flask</span>
+          <span class="tech-tag">SQLAlchemy</span>
+          <span class="tech-tag">SQLite</span>
+          <span class="tech-tag">Chart.js</span>
+          <span class="tech-tag">HTML/CSS/JS</span>
+          <span class="tech-tag">Render</span>
+        </div>
+        <div class="project-links">
+          <a href="https://finance-tracker-yl2x.onrender.com" class="plink" target="_blank">Live Demo →</a>
+          <a href="https://github.com/shreeshpokharel-stack/finance_tracker" class="plink" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <!-- STRATOS -->
+      <div class="project-card stratos reveal">
+        <div class="project-number">03</div>
+        <div class="project-icon">🚀</div>
+        <div class="stratos-badge">Command Center</div>
+        <h3 class="project-title">STRATOS Dashboard</h3>
+        <p class="project-desc">A personal digital command center built with Flask that unifies AI tools, sports resources, music, social media, productivity utilities, and real-time clocks into one sleek dashboard.</p>
+        <div class="hub-grid">
+          <div class="hub-item">
+            <span class="hub-label">AI Hub</span>
+            ChatGPT · Grok · Gemini · Claude
+          </div>
+          <div class="hub-item">
+            <span class="hub-label">Sports</span>
+            LiveSports · SofaScore · YosinTV
+          </div>
+          <div class="hub-item">
+            <span class="hub-label">Music</span>
+            Spotify Integration
+          </div>
+          <div class="hub-item">
+            <span class="hub-label">Social</span>
+            YouTube · Facebook · Instagram
+          </div>
+          <div class="hub-item">
+            <span class="hub-label">Productivity</span>
+            Notes · Search · Themes
+          </div>
+          <div class="hub-item">
+            <span class="hub-label">Utilities</span>
+            Calculator · World Clocks
+          </div>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Flask</span>
+          <span class="tech-tag">HTML5</span>
+          <span class="tech-tag">CSS3</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/shreeshpokharel-stack" class="plink" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Academic Journey</p>
+      <h2 class="section-title">Education</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="gpa-circle">
+          <span class="gpa-num">3.47</span>
+          <span class="gpa-lbl">GPA</span>
+        </div>
+        <div class="edu-info">
+          <h3>Class 8 — Board Exam</h3>
+          <p>Strong academic foundation with a GPA of 3.47 in the district board examination.</p>
+        </div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="gpa-circle">
+          <span class="gpa-num">3.25</span>
+          <span class="gpa-lbl">GPA</span>
+        </div>
+        <div class="edu-info">
+          <h3>Class 9 — Final Exam</h3>
+          <p>Completed Class 9 with a 3.25 GPA, continuing to build strong science and math skills.</p>
+        </div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="gpa-circle" style="border-color: #14b8a6;">
+          <span class="gpa-num" style="color: #14b8a6;">3.69</span>
+          <span class="gpa-lbl">GPA</span>
+        </div>
+        <div class="edu-info">
+          <h3>Class 10 — SEE Board Exam</h3>
+          <p>Achieved a notable 3.69 GPA in the national Secondary Education Examination (SEE).</p>
+        </div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="gpa-circle" style="border-color: var(--accent2);">
+          <span class="gpa-num" style="color: var(--accent2);">3.56</span>
+          <span class="gpa-lbl">GPA</span>
+        </div>
+        <div class="edu-info">
+          <h3>Class 11 — Final Exam</h3>
+          <p>Completed Class 11 with a 3.56 GPA, with a focus on science and technology subjects.</p>
+        </div>
+      </div>
+      <div class="edu-card reveal" style="grid-column: span 2;">
+        <div class="awaiting">
+          <span>Results Awaited</span>
+        </div>
+        <div class="edu-info">
+          <h3>Class 12 — Final Exam (2025)</h3>
+          <p>Currently awaiting the Class 12 final exam results. This marks the completion of higher secondary education and the next step toward a future in Computer Science and Artificial Intelligence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner reveal">
+      <p class="section-label" style="text-align:center; margin-bottom:0.5rem;">Let's Connect</p>
+      <h3>Get in Touch</h3>
+      <p>I'm open to collaborations, internship opportunities, or just a conversation about AI and technology. Feel free to reach out!</p>
+      <div class="contact-links">
+        <a href="mailto:shreeshpokharel@gmail.com" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          shreeshpokharel@gmail.com
+        </a>
+        <a href="tel:+9779704526827" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          9704526827
+        </a>
+        <a href="https://github.com/shreeshpokharel-stack" class="contact-link" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <a href="mailto:shreeshpokharel@gmail.com" class="btn-primary">Say Hello →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Crafted with ♥ by <span>Shreesh Pokharel</span> · Biratnagar, Nepal · 2025</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Parallax hero content on scroll
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const hero = document.querySelector('.hero-content');
+    if (hero) hero.style.transform = `translateY(${y * 0.2}px)`;
+  });
+</script>
+</body>
+</html>
